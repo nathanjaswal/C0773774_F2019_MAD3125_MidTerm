@@ -3,11 +3,14 @@ package com.example.c0773774_f2019_mad3125_midterm;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -49,15 +52,19 @@ public class MainActivity extends AppCompatActivity  {
 
 
     // Action: -
-    void fnOrln_etComplete() {
+    void fnOrln_etComplete(EditText edText) {
 
-        if (fn_et.getText().toString() != "" && ln_et.getText().toString() != ""){
+        if (fn_et.getText().toString().length() != 0 && ln_et.getText().toString().length() != 0){
             fulln_tv.setAlpha(1.0f);
-            String strFullN = fn_et.getText().toString() + " " + ln_et.getText().toString()
+            String strFullN = fn_et.getText().toString() + " " + ln_et.getText().toString();
             fulln_tv.setText(strFullN);
         }else{
             fulln_tv.setAlpha(0.0f);
         }
+
+        //edText.setFocusable(false);
+        //edText.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+        this.dismissKeyboard(edText);
     }
 
     void grossin_etComplete() {
@@ -68,21 +75,28 @@ public class MainActivity extends AppCompatActivity  {
 
     }
 
-    void dobClicked(View view){
-
+    public void dobClicked(View view){
+        Log.i("Ni", "happy");
+        view.setFocusable(false);
     }
 
     void dobBtnClicked(View view){
-
+        view.setFocusable(false);
     }
 
-    void genderClicked(View view){
+    void genderClicked(){
 
     }
 
     // Helper: -
     boolean checkValidations() {
+
         return true;
+    }
+
+    void dismissKeyboard(EditText edText) {
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(edText.getWindowToken(), 0);
     }
 
     private void iniSetUp() {
@@ -113,15 +127,26 @@ public class MainActivity extends AppCompatActivity  {
         //
         fulln_tv.setAlpha(0.0f);
 
+        gender_et.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                genderClicked();
+            }
+        });
+
         //
         fn_et.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 switch (actionId){
                     case EditorInfo.IME_ACTION_DONE:
+                        fnOrln_etComplete(fn_et);
+                        return true;
                     case EditorInfo.IME_ACTION_NEXT:
+                        fnOrln_etComplete(fn_et);
+                        return true;
                     case EditorInfo.IME_ACTION_PREVIOUS:
-                        fnOrln_etComplete();
+                        fnOrln_etComplete(fn_et);
                         return true;
                 }
                 return false;
@@ -134,9 +159,13 @@ public class MainActivity extends AppCompatActivity  {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 switch (actionId){
                     case EditorInfo.IME_ACTION_DONE:
+                        fnOrln_etComplete(ln_et);
+                        return true;
                     case EditorInfo.IME_ACTION_NEXT:
+                        fnOrln_etComplete(ln_et);
+                        return true;
                     case EditorInfo.IME_ACTION_PREVIOUS:
-                        fnOrln_etComplete();
+                        fnOrln_etComplete(ln_et);
                         return true;
                 }
                 return false;

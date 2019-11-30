@@ -4,6 +4,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +27,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Action: -
+    void dobClicked(View view){
+
+    }
+
+    void dobBtnClicked(View view){
+
+    }
+
+    void genderClicked(View view){
+
+    }
 
 
 }

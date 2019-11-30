@@ -111,7 +111,7 @@
                         android:layout_marginEnd="12dp"
                         android:ems="10"
                         android:hint="Enter SIN Number..."
-                        android:inputType="textPersonName"
+                        android:inputType="number"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -167,6 +167,7 @@
                         android:layout_marginStart="15dp"
                         android:layout_marginEnd="15dp"
                         android:text="Full Name"
+                        android:textColor="@color/themeColor"
                         app:layout_constraintBottom_toTopOf="@+id/dobET"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -182,7 +183,7 @@
                         android:editable="false"
                         android:ems="10"
                         android:hint="Select Date of Birth..."
-                        android:inputType="textPersonName"
+                        android:inputType="date"
                         android:onClick="dobClicked"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -217,6 +218,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
                         android:text="Age"
+                        android:textColor="@color/themeColor"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -253,7 +255,8 @@
                         android:editable="false"
                         android:ems="10"
                         android:hint="Tax Filing Date..."
-                        android:inputType="textPersonName"
+                        android:inputType="date"
+                        android:textColor="@color/themeColor"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -270,6 +273,7 @@
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="12dp"
                         android:layout_marginEnd="12dp"
+                        android:drawableLeft="@drawable/dollar_icon"
                         android:ems="10"
                         android:hint="Enter Gross Income..."
                         android:inputType="numberDecimal"
@@ -283,14 +287,17 @@
                     android:layout_height="match_parent">
 
                     <EditText
+                        android:id="@+id/fedTaxET"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="12dp"
                         android:layout_marginEnd="12dp"
+                        android:editable="false"
                         android:ems="10"
-                        android:hint="Enter SIN Number..."
+                        android:hint="Fedral Tax..."
                         android:inputType="textPersonName"
+                        android:textColor="@color/themeColor"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -301,58 +308,152 @@
                     android:layout_height="match_parent">
 
                     <EditText
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginEnd="12dp"
-                        android:ems="10"
-                        android:hint="Enter SIN Number..."
-                        android:inputType="textPersonName"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <EditText
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginEnd="12dp"
-                        android:ems="10"
-                        android:hint="Enter SIN Number..."
-                        android:inputType="textPersonName"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <EditText
+                        android:id="@+id/provTaxET"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="12dp"
                         android:layout_marginEnd="12dp"
                         android:layout_marginBottom="10dp"
+                        android:editable="false"
                         android:ems="10"
-                        android:hint="Enter"
+                        android:hint="Provisional Tax..."
                         android:inputType="textPersonName"
+                        android:textColor="@color/themeColor"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:id="@+id/cppET"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:editable="false"
+                        android:ems="10"
+                        android:hint="CPP..."
+                        android:inputType="textPersonName"
+                        android:textColor="@color/themeColor"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:id="@+id/eiET"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:editable="false"
+                        android:ems="10"
+                        android:hint="Employment Insurance..."
+                        android:inputType="textPersonName"
+                        android:textColor="@color/themeColor"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:id="@+id/rrspET"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:ems="10"
+                        android:hint="Enter RRSP..."
+                        android:inputType="textPersonName"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:id="@+id/carryRRSPET"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:editable="false"
+                        android:ems="10"
+                        android:hint=" Carry forward RRSP..."
+                        android:inputType="textPersonName"
+                        android:textColor="@color/themeColor"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:id="@+id/totalTaxET"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:editable="false"
+                        android:ems="10"
+                        android:hint="Total taxable Income"
+                        android:inputType="textPersonName"
+                        android:textColor="@color/themeColor"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:id="@+id/totalTaxPayedET"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:editable="false"
+                        android:ems="10"
+                        android:hint="Total Tax Payed..."
+                        android:inputType="textPersonName"
+                        android:textColor="@color/themeColor"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </LinearLayout>
         </ScrollView>
+
     </FrameLayout>
 
     <Button

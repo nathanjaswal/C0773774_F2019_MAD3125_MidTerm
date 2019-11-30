@@ -75,7 +75,7 @@
 
     <FrameLayout
         android:id="@+id/contView"
-        android:layout_width="330dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
@@ -88,10 +88,10 @@
         app:layout_constraintTop_toBottomOf="@+id/textView9">
 
         <ScrollView
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -160,23 +160,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <EditText
-                        android:id="@+id/dobET"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginEnd="60dp"
-                        android:editable="false"
-                        android:ems="10"
-                        android:hint="Select Date of Birth..."
-                        android:inputType="textPersonName"
-                        android:onClick="dobClicked"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/fullNameTV" />
-
                     <TextView
                         android:id="@+id/fullNameTV"
                         android:layout_width="0dp"
@@ -188,6 +171,23 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/dobET"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="60dp"
+                        android:editable="false"
+                        android:ems="10"
+                        android:hint="Select Date of Birth..."
+                        android:inputType="textPersonName"
+                        android:onClick="dobClicked"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/fullNameTV" />
 
                     <ImageButton
                         android:id="@+id/dobIB"
@@ -210,12 +210,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
+                    <TextView
+                        android:id="@+id/ageTV"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="Age"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <EditText
                         android:id="@+id/genderET"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="12dp"
                         android:layout_marginEnd="12dp"
                         android:editable="false"
                         android:ems="10"
@@ -226,17 +237,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/ageTV" />
 
-                    <TextView
-                        android:id="@+id/ageTV"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="16dp"
-                        android:text="Age"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -244,13 +244,15 @@
                     android:layout_height="match_parent">
 
                     <EditText
+                        android:id="@+id/taxdateET"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="12dp"
                         android:layout_marginEnd="12dp"
+                        android:editable="false"
                         android:ems="10"
-                        android:hint="Enter SIN Number..."
+                        android:hint="Tax Filing Date..."
                         android:inputType="textPersonName"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -262,14 +264,15 @@
                     android:layout_height="match_parent">
 
                     <EditText
+                        android:id="@+id/grossIncomeET"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="12dp"
                         android:layout_marginEnd="12dp"
                         android:ems="10"
-                        android:hint="Enter SIN Number..."
-                        android:inputType="textPersonName"
+                        android:hint="Enter Gross Income..."
+                        android:inputType="numberDecimal"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -357,11 +360,22 @@
         android:layout_width="160dp"
         android:layout_height="50dp"
         android:layout_marginBottom="20dp"
-        android:alpha="0.5"
+        android:alpha="0.2"
         android:background="@drawable/rounded_button"
         android:text="Continue >"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="made by Nitin Jaswal (C0773774)(Lambton College)"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -2,20 +2,24 @@ package com.example.c0773774_f2019_mad3125_midterm;
 //
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
 
     // Attributes:-
     EditText sin_et;
@@ -37,6 +41,8 @@ public class MainActivity extends AppCompatActivity  {
     EditText ttl_taxin_et;
     EditText ttl_taxpyd_et;
 
+    ConstraintLayout constraintLayout;
+
     // Life Cycle: -
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +54,12 @@ public class MainActivity extends AppCompatActivity  {
 
     }
 
-    // Listners: -
+    // Overloading: -
+
 
 
     // Action: -
-    void fnOrln_etComplete(EditText edText) {
+    void fnOrln_etComplete() {
 
         if (fn_et.getText().toString().length() != 0 && ln_et.getText().toString().length() != 0){
             fulln_tv.setAlpha(1.0f);
@@ -64,7 +71,7 @@ public class MainActivity extends AppCompatActivity  {
 
         //edText.setFocusable(false);
         //edText.setImeOptions(EditorInfo.IME_ACTION_NEXT);
-        this.dismissKeyboard(edText);
+        this.hideSoftKeyboard();
     }
 
     void grossin_etComplete() {
@@ -76,28 +83,46 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     public void dobClicked(View view){
-        Log.i("Ni", "happy");
-        view.setFocusable(false);
+        this.hideSoftKeyboard();
     }
 
     void dobBtnClicked(View view){
-        view.setFocusable(false);
+        this.hideSoftKeyboard();
     }
 
     void genderClicked(){
-
+        this.hideSoftKeyboard();
     }
 
     // Helper: -
+    /**
+     * Hides the soft keyboard
+     */
+    public void hideSoftKeyboard() {
+        if(getCurrentFocus()!=null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
+    }
+
+    /**
+     * Shows the soft keyboard
+     */
+    public void showSoftKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        view.requestFocus();
+        inputMethodManager.showSoftInput(view, 0);
+    }
+
     boolean checkValidations() {
 
         return true;
     }
 
-    void dismissKeyboard(EditText edText) {
-        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(edText.getWindowToken(), 0);
-    }
+//    void dismissKeyboard(EditText edText) {
+//        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+//        imm.hideSoftInputFromWindow(edText.getWindowToken(), 0);
+//    }
 
     private void iniSetUp() {
         //
@@ -127,9 +152,29 @@ public class MainActivity extends AppCompatActivity  {
         //
         fulln_tv.setAlpha(0.0f);
 
+        //https://www.tutorialspoint.com/how-to-check-visibility-of-virtual-keyboard-on-android
+        constraintLayout=findViewById(R.id.rootView);
+        constraintLayout.getViewTreeObserver().addOnGlobalLayoutListener(new             ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                Rect r = new Rect();
+                constraintLayout.getWindowVisibleDisplayFrame(r);
+                int screenHeight = constraintLayout.getRootView().getHeight();
+                int keypadHeight = screenHeight - r.bottom;
+                if (keypadHeight > screenHeight * 0.15) {
+                    //Toast.makeText(MainActivity.this,"Keyboard is showing",Toast.LENGTH_LONG).show();
+                } else {
+                    // call method
+                    fnOrln_etComplete();
+                    //Toast.makeText(MainActivity.this,"keyboard closed",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
         gender_et.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 genderClicked();
             }
         });
@@ -140,13 +185,13 @@ public class MainActivity extends AppCompatActivity  {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 switch (actionId){
                     case EditorInfo.IME_ACTION_DONE:
-                        fnOrln_etComplete(fn_et);
+                        fnOrln_etComplete();
                         return true;
                     case EditorInfo.IME_ACTION_NEXT:
-                        fnOrln_etComplete(fn_et);
+                        fnOrln_etComplete();
                         return true;
                     case EditorInfo.IME_ACTION_PREVIOUS:
-                        fnOrln_etComplete(fn_et);
+                        fnOrln_etComplete();
                         return true;
                 }
                 return false;
@@ -159,13 +204,13 @@ public class MainActivity extends AppCompatActivity  {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 switch (actionId){
                     case EditorInfo.IME_ACTION_DONE:
-                        fnOrln_etComplete(ln_et);
+                        fnOrln_etComplete();
                         return true;
                     case EditorInfo.IME_ACTION_NEXT:
-                        fnOrln_etComplete(ln_et);
+                        fnOrln_etComplete();
                         return true;
                     case EditorInfo.IME_ACTION_PREVIOUS:
-                        fnOrln_etComplete(ln_et);
+                        fnOrln_etComplete();
                         return true;
                 }
                 return false;
@@ -203,6 +248,5 @@ public class MainActivity extends AppCompatActivity  {
         });
 
     }
-
 
 }

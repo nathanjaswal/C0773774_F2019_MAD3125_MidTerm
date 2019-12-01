@@ -1,5 +1,7 @@
-package com.example.c0773774_f2019_mad3125_midterm;
+package com.example.c0773774_f2019_mad3125_midterm.Activities;
 //
+// https://stackoverflow.com/questions/8654990/how-can-i-get-current-date-in-android
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -18,6 +20,13 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.c0773774_f2019_mad3125_midterm.Activities.Helper.Helper;
+import com.example.c0773774_f2019_mad3125_midterm.R;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,11 +61,9 @@ public class MainActivity extends AppCompatActivity {
         // call method
         this.iniSetUp();
 
+        this.setupUI();
+
     }
-
-    // Overloading: -
-
-
 
     // Action: -
     void fnOrln_etComplete() {
@@ -75,6 +82,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void grossin_etComplete() {
+
+        if (grossin_et.getText().toString().length() != 0){
+            Helper obj = new Helper();
+
+            Float passVal = Float.parseFloat(grossin_et.getText().toString());
+            Log.i("Nitin", String.valueOf(obj.calFedralTax(passVal)));
+
+        }
+
+        this.hideSoftKeyboard();
 
     }
 
@@ -95,6 +112,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Helper: -
+    String currentDate() {
+        Date c = Calendar.getInstance().getTime();
+        //System.out.println("Current time => " + c);
+
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        String formattedDate = df.format(c);
+
+        return formattedDate;
+    }
+
+    void setupUI() {
+        taxdate_et.setText(currentDate());//
+    }
+
     /**
      * Hides the soft keyboard
      */
@@ -166,6 +197,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     // call method
                     fnOrln_etComplete();
+                    grossin_etComplete();
                     //Toast.makeText(MainActivity.this,"keyboard closed",Toast.LENGTH_LONG).show();
                 }
             }
@@ -223,7 +255,11 @@ public class MainActivity extends AppCompatActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 switch (actionId){
                     case EditorInfo.IME_ACTION_DONE:
+                        grossin_etComplete();
+                        return true;
                     case EditorInfo.IME_ACTION_NEXT:
+                        grossin_etComplete();
+                        return true;
                     case EditorInfo.IME_ACTION_PREVIOUS:
                         grossin_etComplete();
                         return true;

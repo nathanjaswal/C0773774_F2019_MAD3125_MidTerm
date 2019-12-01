@@ -81,7 +81,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/rounded_framelayout"
         app:layout_constraintBottom_toTopOf="@+id/contBtn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -113,6 +113,7 @@
                         android:ems="10"
                         android:hint="Enter SIN Number..."
                         android:inputType="number"
+                        android:maxLength="9"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -185,7 +186,6 @@
                         android:ems="10"
                         android:focusable="false"
                         android:hint="Select Date of Birth..."
-                        android:onClick="dobClicked"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -199,7 +199,7 @@
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp"
                         android:background="#FFFFFF"
-                        android:onClick="dobBtnClicked"
+                        android:focusable="false"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/dobET"
@@ -283,19 +283,55 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    tools:layout_editor_absoluteX="-290dp"
+                    tools:layout_editor_absoluteY="741dp">
 
                     <EditText
-                        android:id="@+id/fedTaxET"
+                        android:id="@+id/rrspET"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="12dp"
                         android:layout_marginEnd="12dp"
                         android:drawableLeft="@drawable/dollar_icon"
+                        android:editable="true"
+                        android:ems="10"
+                        android:hint="Enter RRSP..."
+                        android:inputType="numberDecimal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:layout_editor_absoluteX="-285dp"
+                    tools:layout_editor_absoluteY="997dp">
+
+                    <EditText
+                        android:id="@+id/carryRRSPET"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:drawableLeft="@drawable/dollar_icon"
                         android:editable="false"
                         android:ems="10"
-                        android:hint="Fedral Tax..."
+                        android:hint=" Carry forward RRSP..."
+                        android:textColor="@color/themeColor"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/mRrspTV" />
+
+                    <TextView
+                        android:id="@+id/mRrspTV"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="max. RRSP"
                         android:textColor="@color/themeColor"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -304,22 +340,22 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    tools:layout_editor_absoluteX="-304dp"
+                    tools:layout_editor_absoluteY="1117dp">
 
                     <EditText
-                        android:id="@+id/provTaxET"
+                        android:id="@+id/totalTaxET"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="12dp"
                         android:layout_marginEnd="12dp"
-                        android:layout_marginBottom="10dp"
                         android:drawableLeft="@drawable/dollar_icon"
                         android:editable="false"
                         android:ems="10"
-                        android:hint="Provisional Tax..."
+                        android:hint="Total taxable Income"
                         android:textColor="@color/themeColor"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -372,27 +408,7 @@
                     android:layout_height="match_parent">
 
                     <EditText
-                        android:id="@+id/rrspET"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginEnd="12dp"
-                        android:drawableLeft="@drawable/dollar_icon"
-                        android:ems="10"
-                        android:hint="Enter RRSP..."
-                        android:inputType="textPersonName"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <EditText
-                        android:id="@+id/carryRRSPET"
+                        android:id="@+id/fedTaxET"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
@@ -401,9 +417,8 @@
                         android:drawableLeft="@drawable/dollar_icon"
                         android:editable="false"
                         android:ems="10"
-                        android:hint=" Carry forward RRSP..."
+                        android:hint="Fedral Tax..."
                         android:textColor="@color/themeColor"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -414,7 +429,7 @@
                     android:layout_height="match_parent">
 
                     <EditText
-                        android:id="@+id/totalTaxET"
+                        android:id="@+id/provTaxET"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
@@ -423,7 +438,7 @@
                         android:drawableLeft="@drawable/dollar_icon"
                         android:editable="false"
                         android:ems="10"
-                        android:hint="Total taxable Income"
+                        android:hint="Provisional Tax..."
                         android:textColor="@color/themeColor"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

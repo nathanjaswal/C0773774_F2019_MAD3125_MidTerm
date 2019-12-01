@@ -2,12 +2,14 @@ package com.example.c0773774_f2019_mad3125_midterm.Activities;
 //
 // https://stackoverflow.com/questions/8654990/how-can-i-get-current-date-in-android
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -25,6 +27,7 @@ import com.example.c0773774_f2019_mad3125_midterm.Activities.Helper.Helper;
 import com.example.c0773774_f2019_mad3125_midterm.R;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -46,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     EditText cpp_et;
     EditText ei_et;
     EditText rrsp_et;
+    TextView mrrsp_tv;
     EditText cfwd_rrsp_et;
     EditText ttl_taxin_et;
     EditText ttl_taxpyd_et;
@@ -71,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         if (fn_et.getText().toString().length() != 0 && ln_et.getText().toString().length() != 0){
             fulln_tv.setAlpha(1.0f);
             String strFullN = fn_et.getText().toString() + " " + ln_et.getText().toString();
-            fulln_tv.setText(strFullN);
+            fulln_tv.setText("Full Name: " + strFullN);
         }else{
             fulln_tv.setAlpha(0.0f);
         }
@@ -86,8 +90,13 @@ public class MainActivity extends AppCompatActivity {
         if (grossin_et.getText().toString().length() != 0){
             Helper obj = new Helper();
 
-            Float passVal = Float.parseFloat(grossin_et.getText().toString());
-            Log.i("Nitin", String.valueOf(obj.calFedralTax(passVal)));
+            String grossVal = grossin_et.getText().toString();
+            Float passVal = Float.parseFloat(grossVal);
+
+            String strCpp = obj.calCpp(passVal);
+            cpp_et.setText(strCpp);
+            ei_et.setText(obj.calEI(passVal));
+            mrrsp_tv.setText("Max. RRSP: " + obj.calMaxRrsp(passVal));
 
         }
 
@@ -95,16 +104,65 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    void rrsp_etComplete() {
+//    void rrsp_etStarted() {
+//        if (grossin_et.getText().toString().length() == 0) {
+//
+////            rrsp_et.setEditableFactory(true);//setFocusable(false);
+//            //
+//            //Toast.makeText(MainActivity.this,"Please Enter Gross Income first... ",Toast.LENGTH_LONG).show();
+//            rrsp_et.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+//            this.hideSoftKeyboard();
+//        }else{
+//            //rrsp_et.setFocusable(true);
+//            Toast.makeText(MainActivity.this,"Start... ",Toast.LENGTH_LONG).show();
+//        }
 
+//    }
+
+    void rrsp_etCompleted() {
+        if (grossin_et.getText().toString().length() != 0 && rrsp_et.getText().toString().length() != 0) {
+            Helper obj = new Helper();
+
+            Float passVal = Float.parseFloat(grossin_et.getText().toString());
+            Float enRsspVal = Float.parseFloat(rrsp_et.getText().toString());
+            Float carryFwdRrsp = obj.calCarryFwdRrsp(passVal, enRsspVal);
+            String cfwdStr = String.format("%.2f", carryFwdRrsp);
+            cfwd_rrsp_et.setText(cfwdStr + " (Carry Forward)");
+
+            Float cpp = Float.parseFloat(cpp_et.getText().toString());
+            Float ei = Float.parseFloat(ei_et.getText().toString());
+
+            Float maxRrspVal = Float.parseFloat(obj.calMaxRrsp(passVal));
+            Float totalTaxIn = passVal - (cpp + ei + maxRrspVal);
+            ttl_taxin_et.setText(totalTaxIn.toString() + " (Total Taxable Income)");
+
+            fedTax_et.setText(obj.calFedralTax(totalTaxIn) + " (Fedral Tax)");
+            provTax_et.setText(obj.calProvTax(totalTaxIn) + "(Prov Tax)");
+
+            Float fedTax = Float.parseFloat(obj.calFedralTax(totalTaxIn));
+            Float provTax = Float.parseFloat(obj.calProvTax(totalTaxIn));
+            Float totalPayed = fedTax + provTax;
+            String strTtlPayed = String.format("%.2f", totalPayed);
+            ttl_taxpyd_et.setText(strTtlPayed);
+        }else{
+            rrsp_et.setText("");
+            if(rrsp_et.hasFocus() && grossin_et.getText().toString().length() == 0){
+
+                Toast.makeText(MainActivity.this,"Please Enter Gross Income first... ",Toast.LENGTH_LONG).show();
+                this.hideSoftKeyboard();
+            }
+        }
     }
 
-    public void dobClicked(View view){
-        this.hideSoftKeyboard();
-    }
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void dobClicked(){
+        LocalDate l = LocalDate.of(1998, 04, 23);
+        Helper obj = new Helper();
+        //
+        age_tv.setText("Age: " + obj.calAge(l));
 
-    void dobBtnClicked(View view){
         this.hideSoftKeyboard();
+
     }
 
     void genderClicked(){
@@ -123,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void setupUI() {
-        taxdate_et.setText(currentDate());//
+        taxdate_et.setText(currentDate() + " (Tax Filing date)");//
     }
 
     /**
@@ -176,6 +234,7 @@ public class MainActivity extends AppCompatActivity {
         cpp_et = findViewById(R.id.cppET);
         ei_et = findViewById(R.id.eiET);
         rrsp_et = findViewById(R.id.rrspET);
+        mrrsp_tv = findViewById(R.id.mRrspTV);
         cfwd_rrsp_et = findViewById(R.id.carryRRSPET);
         ttl_taxin_et = findViewById(R.id.totalTaxET);
         ttl_taxpyd_et = findViewById(R.id.totalTaxPayedET);
@@ -193,13 +252,19 @@ public class MainActivity extends AppCompatActivity {
                 int screenHeight = constraintLayout.getRootView().getHeight();
                 int keypadHeight = screenHeight - r.bottom;
                 if (keypadHeight > screenHeight * 0.15) {
+
                     //Toast.makeText(MainActivity.this,"Keyboard is showing",Toast.LENGTH_LONG).show();
                 } else {
-                    // call method
+
                     fnOrln_etComplete();
                     grossin_etComplete();
+
                     //Toast.makeText(MainActivity.this,"keyboard closed",Toast.LENGTH_LONG).show();
                 }
+                // call method
+                rrsp_etCompleted();
+
+
             }
         });
 
@@ -210,6 +275,33 @@ public class MainActivity extends AppCompatActivity {
                 genderClicked();
             }
         });
+
+        dob_ib.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View v) {
+
+                dobClicked();
+            }
+        });
+
+        dob_et.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View v) {
+
+                dobClicked();
+            }
+        });
+
+        rrsp_et.setOnTouchListener(new View.OnTouchListener()
+        {
+            public boolean onTouch(View arg0, MotionEvent arg1)
+            {
+                return false;
+            }
+        });
+
 
         //
         fn_et.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -274,9 +366,13 @@ public class MainActivity extends AppCompatActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 switch (actionId){
                     case EditorInfo.IME_ACTION_DONE:
+                        rrsp_etCompleted();
+                        return true;
                     case EditorInfo.IME_ACTION_NEXT:
+                        rrsp_etCompleted();
+                        return true;
                     case EditorInfo.IME_ACTION_PREVIOUS:
-                        rrsp_etComplete();
+                        rrsp_etCompleted();
                         return true;
                 }
                 return false;

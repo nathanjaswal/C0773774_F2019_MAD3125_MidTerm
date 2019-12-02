@@ -231,6 +231,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     void contClicked() {
+
         // call method
         if(sin_et.getText().toString().length() == 0 ||
                 fn_et.getText().toString().length() == 0 ||

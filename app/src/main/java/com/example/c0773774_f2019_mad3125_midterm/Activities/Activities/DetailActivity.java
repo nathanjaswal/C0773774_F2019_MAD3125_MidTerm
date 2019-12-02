@@ -19,12 +19,12 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         //
-//        ActionBar actionBar = getSupportActionBar();
-//        actionBar.hide();
-//
-//        back_btn = findViewById(R.id.backBtn);
-//
-//        //
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
+
+        //back_btn = findViewById(R.id.backBtn);
+
+        //
 //        back_btn.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {

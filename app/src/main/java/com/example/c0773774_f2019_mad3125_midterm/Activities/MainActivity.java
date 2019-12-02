@@ -7,12 +7,12 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.content.Context;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -20,6 +20,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +32,7 @@ import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener{
 
     // Attributes:-
     EditText sin_et;
@@ -165,8 +166,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    void genderClicked(){
+    void genderClicked(View v){
+
         this.hideSoftKeyboard();
+
+        PopupMenu popup = new PopupMenu(this, v);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(R.menu.menu_gender);
+        popup.show();
     }
 
     // Helper: -
@@ -268,11 +275,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        registerForContextMenu(gender_et);
         gender_et.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                genderClicked();
+                genderClicked(v);
             }
         });
 
@@ -381,4 +389,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // Override Methods:-
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.maleItem:
+                gender_et.setText("Male");
+                return true;
+            case R.id.femaleItem:
+                gender_et.setText("Female");
+                return true;
+            case R.id.otherItem:
+                gender_et.setText("Other");
+                return true;
+            default:
+                return false;
+        }
+    }
 }

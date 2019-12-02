@@ -42,6 +42,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener{
 
@@ -95,13 +96,9 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     void fnOrln_etComplete() {
 
         if (fn_et.getText().toString().length() != 0 && ln_et.getText().toString().length() != 0){
-            fulln_tv.setAlpha(1.0f);
             String strFullN = fn_et.getText().toString() + " " + ln_et.getText().toString();
             fulln_tv.setText("Full Name: " + strFullN);
-        }else{
-            fulln_tv.setAlpha(0.0f);
         }
-
         //edText.setFocusable(false);
         //edText.setImeOptions(EditorInfo.IME_ACTION_NEXT);
         this.hideSoftKeyboard();
@@ -265,6 +262,29 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
             // navigate
             Intent dAct = new Intent(MainActivity.this, DetailActivity.class);
+
+            HashMap<String, String> dataMap=new HashMap<String, String>();
+
+            dataMap.put("SinMV", sin_et.getText().toString());
+            dataMap.put("FnameMV", fn_et.getText().toString());
+            dataMap.put("LnameMV", ln_et.getText().toString());
+            dataMap.put("FulnameMV", fulln_tv.getText().toString());
+            dataMap.put("DobMV", dob_et.getText().toString());
+            dataMap.put("AgeMV", String.valueOf(ageOfUser));
+            dataMap.put("GenderMV", gender_et.getText().toString());
+            dataMap.put("TaxDateMV", taxdate_et.getText().toString());
+            dataMap.put("GrossInMV", grossin_et.getText().toString());
+            dataMap.put("RrspMV", rrsp_et.getText().toString());
+            dataMap.put("CarrFwdMV", cfwd_rrsp_et.getText().toString());
+            dataMap.put("TtlTaxInMV", ttl_taxin_et.getText().toString());
+            dataMap.put("CppMV", cpp_et.getText().toString());
+            dataMap.put("EiMV", ei_et.getText().toString());
+            dataMap.put("FtMV", fedTax_et.getText().toString());
+            dataMap.put("PrMV", provTax_et.getText().toString());
+            dataMap.put("TtPayMV", ttl_taxpyd_et.getText().toString());
+
+            dAct.putExtra("DataCal", dataMap);
+
             startActivity(dAct);
         }
 
@@ -385,8 +405,6 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         ttl_taxpyd_et = findViewById(R.id.totalTaxPayedET);
         cont_btn = findViewById(R.id.contBtn);
 
-        //
-        fulln_tv.setAlpha(0.0f);
 
         //https://www.tutorialspoint.com/how-to-check-visibility-of-virtual-keyboard-on-android
         constraintLayout=findViewById(R.id.rootView);

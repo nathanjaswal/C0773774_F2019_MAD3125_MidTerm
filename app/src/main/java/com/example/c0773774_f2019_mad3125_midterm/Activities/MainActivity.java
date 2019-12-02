@@ -146,17 +146,17 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             Float enRsspVal = Float.parseFloat(rrsp_et.getText().toString());
             Float carryFwdRrsp = obj.calCarryFwdRrsp(passVal, enRsspVal);
             String cfwdStr = String.format("%.2f", carryFwdRrsp);
-            cfwd_rrsp_et.setText(cfwdStr + " (Carry Forward)");
+            cfwd_rrsp_et.setText(cfwdStr);
 
             Float cpp = Float.parseFloat(cpp_et.getText().toString());
             Float ei = Float.parseFloat(ei_et.getText().toString());
 
             Float maxRrspVal = Float.parseFloat(obj.calMaxRrsp(passVal));
             Float totalTaxIn = passVal - (cpp + ei + maxRrspVal);
-            ttl_taxin_et.setText(totalTaxIn.toString() + " (Total Taxable Income)");
+            ttl_taxin_et.setText(totalTaxIn.toString());
 
-            fedTax_et.setText(obj.calFedralTax(totalTaxIn) + " (Fedral Tax)");
-            provTax_et.setText(obj.calProvTax(totalTaxIn) + "(Prov Tax)");
+            fedTax_et.setText(obj.calFedralTax(totalTaxIn));
+            provTax_et.setText(obj.calProvTax(totalTaxIn));
 
             Float fedTax = Float.parseFloat(obj.calFedralTax(totalTaxIn));
             Float provTax = Float.parseFloat(obj.calProvTax(totalTaxIn));
@@ -185,13 +185,13 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        LocalDate l = LocalDate.of(year, month, dayOfMonth);
+                        LocalDate l = LocalDate.of(year, month+1, dayOfMonth);
                         Helper obj = new Helper();
                         //
                         ageOfUser = Integer.valueOf(obj.calAge(l));
                         age_tv.setText("Age: " + obj.calAge(l));
                         Log.i("Nitin>>", "inputDateStr");
-                        String inputDateStr= String.valueOf(year) +"-"+ String.valueOf(month)+"-"+ String.valueOf(dayOfMonth) ;
+                        String inputDateStr= String.valueOf(year) +"-"+ String.valueOf(month+1)+"-"+ String.valueOf(dayOfMonth) ;
                         Log.i("Nitin>>", inputDateStr);
                         DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
                         DateFormat outputFormat = new SimpleDateFormat("dd-MMM-yyyy");
@@ -268,7 +268,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             dataMap.put("SinMV", sin_et.getText().toString());
             dataMap.put("FnameMV", fn_et.getText().toString());
             dataMap.put("LnameMV", ln_et.getText().toString());
-            dataMap.put("FulnameMV", fulln_tv.getText().toString());
+            dataMap.put("FulnameMV", fn_et.getText().toString() +" "+ ln_et.getText().toString());
             dataMap.put("DobMV", dob_et.getText().toString());
             dataMap.put("AgeMV", String.valueOf(ageOfUser));
             dataMap.put("GenderMV", gender_et.getText().toString());
@@ -346,7 +346,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     void setupUI() {
-        taxdate_et.setText(currentDate() + " (Tax Filing date)");//
+        taxdate_et.setText(currentDate());//
     }
 
     /**

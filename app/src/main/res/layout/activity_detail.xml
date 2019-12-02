@@ -10,7 +10,7 @@
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -29,9 +29,9 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="200dp"
                     android:layout_marginStart="30dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="30dp"
                     android:layout_marginBottom="10dp"
                     android:background="@color/themeColor"
@@ -114,7 +114,7 @@
                             android:layout_marginEnd="8dp"
                             android:layout_marginBottom="20dp"
                             android:text="0%"
-                            android:textColor="#2196F3"
+                            android:textColor="#FFFFFF"
                             android:textSize="19sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -131,7 +131,7 @@
                             android:layout_marginEnd="26dp"
                             android:layout_marginBottom="20dp"
                             android:text="$0.00"
-                            android:textColor="#2196F3"
+                            android:textColor="#FFFFFF"
                             android:textSize="19sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -161,9 +161,9 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="12dp"
-                    android:layout_marginEnd="30dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_marginBottom="20dp"
                     app:cardCornerRadius="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -348,7 +348,7 @@
                         <TextView
                             android:id="@+id/sinTV"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="20dp"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="20dp"
                             android:layout_marginEnd="16dp"
@@ -362,7 +362,7 @@
                         <TextView
                             android:id="@+id/fullNameTV"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="20dp"
                             android:layout_marginStart="15dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginEnd="16dp"
@@ -374,9 +374,9 @@
                         <TextView
                             android:id="@+id/ageTV"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="20dp"
                             android:layout_marginStart="15dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="7dp"
                             android:layout_marginEnd="16dp"
                             android:text="-"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -386,7 +386,7 @@
                         <TextView
                             android:id="@+id/dobTV"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="20dp"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginEnd="16dp"
@@ -398,9 +398,9 @@
                         <TextView
                             android:id="@+id/genderTV"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="20dp"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="7dp"
                             android:layout_marginEnd="16dp"
                             android:text="-"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -410,9 +410,9 @@
                         <TextView
                             android:id="@+id/taxFilDatTV"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="20dp"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="7dp"
                             android:layout_marginEnd="16dp"
                             android:text="-"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -422,9 +422,9 @@
                         <TextView
                             android:id="@+id/grosIncTV"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="20dp"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="7dp"
                             android:layout_marginEnd="16dp"
                             android:text="-"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -434,9 +434,9 @@
                         <TextView
                             android:id="@+id/ttlTaxIn"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="20dp"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="7dp"
                             android:layout_marginEnd="16dp"
                             android:text="-"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -446,9 +446,9 @@
                         <TextView
                             android:id="@+id/rrspTV"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="20dp"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="7dp"
                             android:layout_marginEnd="16dp"
                             android:text="-"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -458,9 +458,9 @@
                         <TextView
                             android:id="@+id/crrFwdRrspTV"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="20dp"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="7dp"
                             android:layout_marginEnd="16dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/textView37"
@@ -469,9 +469,9 @@
                         <TextView
                             android:id="@+id/cppTV"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="20dp"
                             android:layout_marginStart="16dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="7dp"
                             android:layout_marginEnd="16dp"
                             android:text="-"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -481,9 +481,9 @@
                         <TextView
                             android:id="@+id/eiTV"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="20dp"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="7dp"
                             android:layout_marginEnd="16dp"
                             android:text="-"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -491,11 +491,11 @@
                             app:layout_constraintTop_toBottomOf="@+id/cppTV" />
 
                         <TextView
-                            android:id="@+id/fedET"
+                            android:id="@+id/fedTV"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="20dp"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="7dp"
                             android:layout_marginEnd="16dp"
                             android:text="-"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -507,12 +507,12 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="7dp"
                             android:layout_marginEnd="16dp"
                             android:text="-"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/textView42"
-                            app:layout_constraintTop_toBottomOf="@+id/fedET" />
+                            app:layout_constraintTop_toBottomOf="@+id/fedTV" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
             </androidx.constraintlayout.widget.ConstraintLayout>

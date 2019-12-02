@@ -9,6 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.c0773774_f2019_mad3125_midterm.Activities.Activities.DetailActivity;
 import com.example.c0773774_f2019_mad3125_midterm.Activities.Helper.Helper;
 import com.example.c0773774_f2019_mad3125_midterm.R;
 
@@ -261,6 +263,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             cont_btn.setAlpha(1.0f);
 
             // navigate
+            Intent dAct = new Intent(MainActivity.this, DetailActivity.class);
+            startActivity(dAct);
         }
 
     }

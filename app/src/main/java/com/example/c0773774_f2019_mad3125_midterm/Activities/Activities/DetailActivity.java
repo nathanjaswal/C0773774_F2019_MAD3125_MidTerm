@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.example.c0773774_f2019_mad3125_midterm.R;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.HashMap;
 
 public class DetailActivity extends AppCompatActivity {
@@ -92,14 +94,31 @@ public class DetailActivity extends AppCompatActivity {
         dob_tv.setText(dataM.get("DobMV"));
         gender_tv.setText(dataM.get("GenderMV"));
         taxFilDate_tv.setText(dataM.get("TaxDateMV"));
-        grossIn_tv.setText("$"+dataM.get("GrossInMV"));
-        ttlTaxIn_tv.setText("$"+dataM.get("TtlTaxInMV"));
-        rrsp_tv.setText("$"+dataM.get("RrspMV"));
-        crrFwdRrsp_tv.setText("$"+dataM.get("CarrFwdMV"));
-        cpp_tv.setText("$"+dataM.get("CppMV"));
-        ei_tv.setText("$"+dataM.get("EiMV"));
-        fedTax_tv.setText("$"+dataM.get("FtMV"));
-        provTax_tv.setText("$"+dataM.get("PrMV"));
+
+        Log.i("rr", dataM.get("GrossInMV"));
+        Float grossInVal = Float.parseFloat(dataM.get("GrossInMV"));
+        grossIn_tv.setText("$"+setFormat(grossInVal));
+        Log.i("rr", dataM.get("TtlTaxInMV"));
+        Float ttlVal = Float.parseFloat(dataM.get("TtlTaxInMV"));
+        ttlTaxIn_tv.setText("$"+setFormat(ttlVal));
+        Log.i("rr", dataM.get("RrspMV"));
+        Float rrspVal = Float.parseFloat(dataM.get("RrspMV"));
+        rrsp_tv.setText("$"+setFormat(rrspVal));
+        Log.i("rr", dataM.get("CarrFwdMV"));
+        Float crrVal = Float.parseFloat(dataM.get("CarrFwdMV"));
+        crrFwdRrsp_tv.setText("$"+setFormat(crrVal));
+        Log.i("rr", dataM.get("CppMV"));
+        Float cppVal = Float.parseFloat(dataM.get("CppMV"));
+        cpp_tv.setText("$"+setFormat(cppVal));
+        Log.i("rr", dataM.get("EiMV"));
+        Float eiVal = Float.parseFloat(dataM.get("EiMV"));
+        ei_tv.setText("$"+setFormat(eiVal));
+        Log.i("rr", dataM.get("FtMV"));
+        Float ftVal = Float.parseFloat(dataM.get("FtMV"));
+        fedTax_tv.setText("$"+setFormat(ftVal));
+        Log.i("rr", dataM.get("PrMV"));
+        Float prVal = Float.parseFloat(dataM.get("PrMV"));
+        provTax_tv.setText("$"+setFormat(prVal));
 
         Float grossIn = Float.parseFloat(dataM.get("GrossInMV"));
         Float ttPay = Float.parseFloat(dataM.get("TtPayMV"));
@@ -108,8 +127,17 @@ public class DetailActivity extends AppCompatActivity {
         avg_tv.setText(avgVal+"%");
 
         Float InAfter = grossIn - ttPay;
-        inAft_tv.setText("$"+String.valueOf(InAfter));
+        inAft_tv.setText("$"+setFormat(InAfter));
 
+    }
+
+    // Helper:-
+    String setFormat(Float val){
+
+        NumberFormat formatter = new DecimalFormat("###,###,###.##");
+        String result = String.valueOf(formatter.format(val));
+
+        return result;
     }
 
 }

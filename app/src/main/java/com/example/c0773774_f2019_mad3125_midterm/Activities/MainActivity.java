@@ -11,8 +11,10 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -96,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     void fnOrln_etComplete() {
 
         if (fn_et.getText().toString().length() != 0 && ln_et.getText().toString().length() != 0){
-            String strFullN = fn_et.getText().toString() + " " + ln_et.getText().toString();
+            String strFullN = ln_et.getText().toString().toUpperCase() + " " + fn_et.getText().toString();
             fulln_tv.setText("Full Name: " + strFullN);
         }
         //edText.setFocusable(false);
@@ -138,6 +140,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
 //    }
 
+    //@SuppressLint("ResourceAsColor")
+
     void rrsp_etCompleted() {
         if (grossin_et.getText().toString().length() != 0 && rrsp_et.getText().toString().length() != 0) {
             Helper obj = new Helper();
@@ -147,6 +151,15 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             Float carryFwdRrsp = obj.calCarryFwdRrsp(passVal, enRsspVal);
             String cfwdStr = String.format("%.2f", carryFwdRrsp);
             cfwd_rrsp_et.setText(cfwdStr);
+            Log.i("", cpp_et.getText().toString());
+//            if(carryFwdRrsp < 0.0f){
+//                String s = "<b>Bolded text</b>, <i>italic text</i>, even <u>underlined</u>!";
+//                //age_tv.setTypeface(null, Typeface.BOLD);
+//                //cfwd_rrsp_et.setTextColor(R.color.themeColor);
+//                cfwd_rrsp_et.setText(Html.fromHtml(s));
+//            }
+
+            Log.i("", cpp_et.getText().toString());
 
             Float cpp = Float.parseFloat(cpp_et.getText().toString());
             Float ei = Float.parseFloat(ei_et.getText().toString());
@@ -268,7 +281,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             dataMap.put("SinMV", sin_et.getText().toString());
             dataMap.put("FnameMV", fn_et.getText().toString());
             dataMap.put("LnameMV", ln_et.getText().toString());
-            dataMap.put("FulnameMV", fn_et.getText().toString() +" "+ ln_et.getText().toString());
+            dataMap.put("FulnameMV", ln_et.getText().toString().toUpperCase() + " " + fn_et.getText().toString());
             dataMap.put("DobMV", dob_et.getText().toString());
             dataMap.put("AgeMV", String.valueOf(ageOfUser));
             dataMap.put("GenderMV", gender_et.getText().toString());
@@ -302,6 +315,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         toast.setView(layout);
         toast.show();
     }
+
     @SuppressLint("ResourceAsColor")
     void checkValidation(){
         if(sin_et.getText().toString().length() == 0 ||
@@ -422,6 +436,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
                     fnOrln_etComplete();
                     grossin_etComplete();
+
+                    checkValidation();
 
                     //Toast.makeText(MainActivity.this,"keyboard closed",Toast.LENGTH_LONG).show();
                 }

@@ -11,7 +11,7 @@ import com.example.c0773774_f2019_mad3125_midterm.R;
 
 public class DetailActivity extends AppCompatActivity {
 
-    //Button back_btn;
+    //Button back_btn;eferf
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

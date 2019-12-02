@@ -7,17 +7,24 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
@@ -27,6 +34,8 @@ import android.widget.Toast;
 import com.example.c0773774_f2019_mad3125_midterm.Activities.Helper.Helper;
 import com.example.c0773774_f2019_mad3125_midterm.R;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -54,8 +63,18 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     EditText cfwd_rrsp_et;
     EditText ttl_taxin_et;
     EditText ttl_taxpyd_et;
+    Button cont_btn;
 
     ConstraintLayout constraintLayout;
+
+    DatePickerDialog datePickerDialog;
+
+    int year;
+    int month;
+    int dayOfMonth;
+    Calendar calendar;
+
+    int ageOfUser;
 
     // Life Cycle: -
     @Override
@@ -156,11 +175,44 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void dobClicked(){
-        LocalDate l = LocalDate.of(1998, 04, 23);
-        Helper obj = new Helper();
-        //
-        age_tv.setText("Age: " + obj.calAge(l));
+    public void dobClicked() {
+
+        calendar = Calendar.getInstance();
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+
+        datePickerDialog = new DatePickerDialog(MainActivity.this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        LocalDate l = LocalDate.of(year, month, dayOfMonth);
+                        Helper obj = new Helper();
+                        //
+                        ageOfUser = Integer.valueOf(obj.calAge(l));
+                        age_tv.setText("Age: " + obj.calAge(l));
+                        Log.i("Nitin>>", "inputDateStr");
+                        String inputDateStr= String.valueOf(year) +"-"+ String.valueOf(month)+"-"+ String.valueOf(dayOfMonth) ;
+                        Log.i("Nitin>>", inputDateStr);
+                        DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+                        DateFormat outputFormat = new SimpleDateFormat("dd-MMM-yyyy");
+                        Date date = null;
+                        try {
+                            date = inputFormat.parse(inputDateStr);
+                            String outputDateStr = outputFormat.format(date);
+                            dob_et.setText(outputDateStr);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        //
+                        checkValidation();
+
+                    }
+                }, year, month, dayOfMonth);
+
+        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
+        datePickerDialog.show();
 
         this.hideSoftKeyboard();
 
@@ -176,7 +228,88 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         popup.show();
     }
 
+    void contClicked() {
+        // call method
+        if(sin_et.getText().toString().length() == 0 ||
+                fn_et.getText().toString().length() == 0 ||
+                ln_et.getText().toString().length() == 0 ||
+                dob_et.getText().toString().length() == 0 ||
+                gender_et.getText().toString().length() == 0 ||
+                grossin_et.getText().toString().length() == 0 ||
+                rrsp_et.getText().toString().length() == 0 ||
+                cfwd_rrsp_et.getText().toString().length() == 0 ||
+                ttl_taxin_et.getText().toString().length() == 0 ||
+                cpp_et.getText().toString().length() == 0 ||
+                ei_et.getText().toString().length() == 0 ||
+                fedTax_et.getText().toString().length() == 0 ||
+                provTax_et.getText().toString().length() == 0 ||
+                ttl_taxpyd_et.getText().toString().length() == 0){
+            cont_btn.setAlpha(0.2f);
+             Toast.makeText(MainActivity.this,"All Field are required",Toast.LENGTH_LONG).show();
+        }else if (ageOfUser < 18){
+            cont_btn.setAlpha(0.2f);
+
+            // call method
+            customToast("Not eligible to file tax for current year 2019");
+
+        }else if (sin_et.getText().toString().length() < 9){
+            cont_btn.setAlpha(0.2f);
+
+            // call method
+            customToast("SIN should be of 9 digits");
+        }else{
+            cont_btn.setAlpha(1.0f);
+
+            // navigate
+        }
+
+    }
+
     // Helper: -
+    void customToast(String msg){
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.custom_toast, (ViewGroup) findViewById(R.id.custom_toast_layout));
+        TextView tv = (TextView) layout.findViewById(R.id.cTostTV);
+        tv.setText(msg);
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 100);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
+    }
+    @SuppressLint("ResourceAsColor")
+    void checkValidation(){
+        if(sin_et.getText().toString().length() == 0 ||
+                fn_et.getText().toString().length() == 0 ||
+                ln_et.getText().toString().length() == 0 ||
+                dob_et.getText().toString().length() == 0 ||
+                gender_et.getText().toString().length() == 0 ||
+                grossin_et.getText().toString().length() == 0 ||
+                rrsp_et.getText().toString().length() == 0 ||
+                cfwd_rrsp_et.getText().toString().length() == 0 ||
+                ttl_taxin_et.getText().toString().length() == 0 ||
+                cpp_et.getText().toString().length() == 0 ||
+                ei_et.getText().toString().length() == 0 ||
+                fedTax_et.getText().toString().length() == 0 ||
+                provTax_et.getText().toString().length() == 0 ||
+                ttl_taxpyd_et.getText().toString().length() == 0){
+            cont_btn.setAlpha(0.2f);
+           // Toast.makeText(MainActivity.this,"All Field are required",Toast.LENGTH_LONG).show();
+        }else if (ageOfUser < 18){
+            cont_btn.setAlpha(0.2f);
+//            Toast toast = Toast.makeText(MainActivity.this, "Not eligible to file tax for current year 2019", Toast.LENGTH_SHORT);
+//            TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+//            v.setTextColor(R.color.colorAccent);
+//            toast.show();
+            //Toast.makeText(MainActivity.this,"All Field are required",Toast.LENGTH_LONG).show();
+        }else if (sin_et.getText().toString().length() < 9){
+            cont_btn.setAlpha(0.2f);
+
+        }else{
+            cont_btn.setAlpha(1.0f);
+        }
+    }
+
     String currentDate() {
         Date c = Calendar.getInstance().getTime();
         //System.out.println("Current time => " + c);
@@ -245,6 +378,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         cfwd_rrsp_et = findViewById(R.id.carryRRSPET);
         ttl_taxin_et = findViewById(R.id.totalTaxET);
         ttl_taxpyd_et = findViewById(R.id.totalTaxPayedET);
+        cont_btn = findViewById(R.id.contBtn);
 
         //
         fulln_tv.setAlpha(0.0f);
@@ -271,7 +405,14 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 // call method
                 rrsp_etCompleted();
 
+            }
+        });
 
+        cont_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                contClicked();
             }
         });
 
@@ -318,12 +459,15 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 switch (actionId){
                     case EditorInfo.IME_ACTION_DONE:
                         fnOrln_etComplete();
+                        checkValidation();
                         return true;
                     case EditorInfo.IME_ACTION_NEXT:
                         fnOrln_etComplete();
+                        checkValidation();
                         return true;
                     case EditorInfo.IME_ACTION_PREVIOUS:
                         fnOrln_etComplete();
+                        checkValidation();
                         return true;
                 }
                 return false;
@@ -337,12 +481,15 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 switch (actionId){
                     case EditorInfo.IME_ACTION_DONE:
                         fnOrln_etComplete();
+                        checkValidation();
                         return true;
                     case EditorInfo.IME_ACTION_NEXT:
                         fnOrln_etComplete();
+                        checkValidation();
                         return true;
                     case EditorInfo.IME_ACTION_PREVIOUS:
                         fnOrln_etComplete();
+                        checkValidation();
                         return true;
                 }
                 return false;
@@ -375,12 +522,15 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 switch (actionId){
                     case EditorInfo.IME_ACTION_DONE:
                         rrsp_etCompleted();
+                        checkValidation();
                         return true;
                     case EditorInfo.IME_ACTION_NEXT:
                         rrsp_etCompleted();
+                        checkValidation();
                         return true;
                     case EditorInfo.IME_ACTION_PREVIOUS:
                         rrsp_etCompleted();
+                        checkValidation();
                         return true;
                 }
                 return false;

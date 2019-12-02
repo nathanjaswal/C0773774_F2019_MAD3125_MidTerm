@@ -1,10 +1,4 @@
 <resources>
     <string name="app_name">C0773774_F2019_MAD3125_MidTerm</string>
 
-    <string-array name="gender_array">
-        <item>Male</item>
-        <item>Female</item>
-        <item>Other</item>
-    </string-array>
-
 </resources>

@@ -291,6 +291,18 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
                             android:layout_marginTop="8dp"
+                            android:text="Age:"
+                            android:textColor="#2196F3"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+                        <TextView
+                            android:id="@+id/textView14"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="8dp"
                             android:text="Date of Birth:"
                             android:textColor="#2196F3"
                             android:textStyle="bold"
@@ -300,7 +312,7 @@
                         <TextView
                             android:id="@+id/textView32"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
                             android:layout_marginStart="20dp"
                             android:layout_marginTop="8dp"
                             android:text="Gender:"
@@ -360,6 +372,18 @@
                             app:layout_constraintTop_toBottomOf="@+id/sinTV" />
 
                         <TextView
+                            android:id="@+id/ageTV"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="16dp"
+                            android:text="-"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textView33"
+                            app:layout_constraintTop_toBottomOf="@+id/dobTV" />
+
+                        <TextView
                             android:id="@+id/dobTV"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -368,19 +392,20 @@
                             android:layout_marginEnd="16dp"
                             android:text="-"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/textView33"
+                            app:layout_constraintStart_toEndOf="@+id/textView14"
                             app:layout_constraintTop_toBottomOf="@+id/fullNameTV" />
 
                         <TextView
                             android:id="@+id/genderTV"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="30dp"
+                            android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginEnd="16dp"
+                            android:text="-"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/textView32"
-                            app:layout_constraintTop_toBottomOf="@+id/dobTV" />
+                            app:layout_constraintTop_toBottomOf="@+id/ageTV" />
 
                         <TextView
                             android:id="@+id/taxFilDatTV"

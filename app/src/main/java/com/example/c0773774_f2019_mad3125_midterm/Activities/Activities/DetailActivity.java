@@ -50,7 +50,7 @@ public class DetailActivity extends AppCompatActivity {
         //
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-        //
+        ////
 
         Intent intent = getIntent();
         CRADataModel craObj = intent.getParcelableExtra("DataCal");

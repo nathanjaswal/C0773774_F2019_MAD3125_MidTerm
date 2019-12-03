@@ -39,6 +39,7 @@ public class DetailActivity extends AppCompatActivity {
     TextView ei_tv;
     TextView fedTax_tv;
     TextView provTax_tv;
+    Button backBtn;
 
 
     @Override
@@ -60,6 +61,8 @@ public class DetailActivity extends AppCompatActivity {
 //                finish();
 //            }
 //        });
+
+        //
 
         Intent intent = getIntent();
         CRADataModel craObj = intent.getParcelableExtra("DataCal");
@@ -90,6 +93,7 @@ public class DetailActivity extends AppCompatActivity {
         ei_tv = findViewById(R.id.eiTV);
         fedTax_tv = findViewById(R.id.fedTV);
         provTax_tv = findViewById(R.id.provTV);
+        backBtn = findViewById(R.id.buttonBack);
 
         // parsing values
         ttTax_tv.setText("$"+craObj.getTtlPyV());//dataM.get("TtPayMV"));

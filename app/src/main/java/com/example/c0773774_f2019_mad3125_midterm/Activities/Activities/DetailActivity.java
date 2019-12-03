@@ -4,12 +4,14 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.c0773774_f2019_mad3125_midterm.Activities.Model.CRADataModel;
 import com.example.c0773774_f2019_mad3125_midterm.R;
 
 import java.text.DecimalFormat;
@@ -60,13 +62,16 @@ public class DetailActivity extends AppCompatActivity {
 //        });
 
         Intent intent = getIntent();
-        dataMap = (HashMap<String, String>)intent.getSerializableExtra("DataCal");
+        CRADataModel craObj = intent.getParcelableExtra("DataCal");
+        Log.i("oooola", craObj.getSinV());
 
-        iniSetup(dataMap);
+        //dataMap = (HashMap<String, String>)intent.getSerializableExtra("DataCal");
+
+        iniSetup(craObj);
     }
 
     // Helper:-
-    void iniSetup(HashMap<String, String> dataM) {
+    void iniSetup(CRADataModel craObj) {
         // initializing
         ttTax_tv = findViewById(R.id.ttlTaxPayTV);
         avg_tv = findViewById(R.id.avgTaxTV);
@@ -87,41 +92,45 @@ public class DetailActivity extends AppCompatActivity {
         provTax_tv = findViewById(R.id.provTV);
 
         // parsing values
-        ttTax_tv.setText("$"+dataM.get("TtPayMV"));
-        age_tv.setText(dataM.get("AgeMV"));
-        sin_tv.setText(dataM.get("SinMV"));
-        fn_tv.setText(dataM.get("FulnameMV"));
-        dob_tv.setText(dataM.get("DobMV"));
-        gender_tv.setText(dataM.get("GenderMV"));
-        taxFilDate_tv.setText(dataM.get("TaxDateMV"));
+        ttTax_tv.setText("$"+craObj.getTtlPyV());//dataM.get("TtPayMV"));
+        age_tv.setText(craObj.getAgeV());//dataM.get("AgeMV"));
+        sin_tv.setText(craObj.getSinV());//dataM.get("SinMV"));
+        fn_tv.setText(craObj.getFullnV());//dataM.get("FulnameMV"));
+        dob_tv.setText(craObj.getDobV());//dataM.get("DobMV"));
+        gender_tv.setText(craObj.getGenderV());//dataM.get("GenderMV"));
+        taxFilDate_tv.setText(craObj.getTaxDateV());//dataM.get("TaxDateMV"));
 
-        Log.i("rr", dataM.get("GrossInMV"));
-        Float grossInVal = Float.parseFloat(dataM.get("GrossInMV"));
+        Log.i("rr", craObj.getGrossInV());//dataM.get("GrossInMV"));
+        Float grossInVal = Float.parseFloat(craObj.getGrossInV());
         grossIn_tv.setText("$"+setFormat(grossInVal));
-        Log.i("rr", dataM.get("TtlTaxInMV"));
-        Float ttlVal = Float.parseFloat(dataM.get("TtlTaxInMV"));
+        Log.i("rr", craObj.getTtlInV());
+        Float ttlVal = Float.parseFloat(craObj.getTtlInV());//dataM.get("TtlTaxInMV"));
         ttlTaxIn_tv.setText("$"+setFormat(ttlVal));
-        Log.i("rr", dataM.get("RrspMV"));
-        Float rrspVal = Float.parseFloat(dataM.get("RrspMV"));
+       // Log.i("rr", dataM.get("RrspMV"));
+        Float rrspVal = Float.parseFloat(craObj.getRrspV());//dataM.get("RrspMV"));
         rrsp_tv.setText("$"+setFormat(rrspVal));
-        Log.i("rr", dataM.get("CarrFwdMV"));
-        Float crrVal = Float.parseFloat(dataM.get("CarrFwdMV"));
+        //Log.i("rr", dataM.get("CarrFwdMV"));
+        Float crrVal = Float.parseFloat(craObj.getCfwdV());//dataM.get("CarrFwdMV"));
+        if(crrVal < 0.0f){
+            crrFwdRrsp_tv.setTextColor(Color.RED);
+        }
         crrFwdRrsp_tv.setText("$"+setFormat(crrVal));
-        Log.i("rr", dataM.get("CppMV"));
-        Float cppVal = Float.parseFloat(dataM.get("CppMV"));
+        //Log.i("rr", dataM.get("CppMV"));
+        Float cppVal = Float.parseFloat(craObj.getCppV());//dataM.get("CppMV"));
         cpp_tv.setText("$"+setFormat(cppVal));
-        Log.i("rr", dataM.get("EiMV"));
-        Float eiVal = Float.parseFloat(dataM.get("EiMV"));
+       // Log.i("rr", dataM.get("EiMV"));
+        Float eiVal = Float.parseFloat(craObj.getEiV());//dataM.get("EiMV"));
         ei_tv.setText("$"+setFormat(eiVal));
-        Log.i("rr", dataM.get("FtMV"));
-        Float ftVal = Float.parseFloat(dataM.get("FtMV"));
+        //Log.i("rr", dataM.get("FtMV"));
+        Float ftVal = Float.parseFloat(craObj.getFedTaxV());//dataM.get("FtMV"));
         fedTax_tv.setText("$"+setFormat(ftVal));
-        Log.i("rr", dataM.get("PrMV"));
-        Float prVal = Float.parseFloat(dataM.get("PrMV"));
+        //Log.i("rr", dataM.get("PrMV"));
+        Float prVal = Float.parseFloat(craObj.getProvTaxV());//dataM.get("PrMV"));
         provTax_tv.setText("$"+setFormat(prVal));
 
-        Float grossIn = Float.parseFloat(dataM.get("GrossInMV"));
-        Float ttPay = Float.parseFloat(dataM.get("TtPayMV"));
+        Log.i("rr1", craObj.getTtlPyV());
+        Float grossIn = Float.parseFloat(craObj.getGrossInV());
+        Float ttPay = Float.parseFloat(craObj.getTtlPyV());//dataM.get("TtPayMV"));
         Float avg = (ttPay/grossIn)*100;
         String avgVal = String.format("%.2f", avg);
         avg_tv.setText(avgVal+"%");

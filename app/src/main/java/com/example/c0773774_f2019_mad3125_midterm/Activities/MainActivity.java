@@ -36,6 +36,7 @@ import android.widget.Toast;
 
 import com.example.c0773774_f2019_mad3125_midterm.Activities.Activities.DetailActivity;
 import com.example.c0773774_f2019_mad3125_midterm.Activities.Helper.Helper;
+import com.example.c0773774_f2019_mad3125_midterm.Activities.Model.CRADataModel;
 import com.example.c0773774_f2019_mad3125_midterm.R;
 
 import java.text.DateFormat;
@@ -272,31 +273,67 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             customToast("SIN should be of 9 digits");
         }else{
             cont_btn.setAlpha(1.0f);
+//            String sinV;
+//            String fnV;
+//            String lnV;
+//            String fullnV;
+//            String dobV;
+//            String ageV;
+//            String genderV;
+//            String taxDateV;
+//            String grossInV;
+//            String fedTaxV;
+//            String provTaxV;
+//            String cppV;
+//            String eiV;
+//            String rrspV;
+//            String cfwdV;
+//            String ttlInV;
+//            String ttlPyV;
+
+            CRADataModel onjCra = new CRADataModel();
+            onjCra.setSinV(sin_et.getText().toString());
+            onjCra.setFnV(fn_et.getText().toString());
+            onjCra.setLnV(ln_et.getText().toString());
+            onjCra.setFullnV(ln_et.getText().toString().toUpperCase() + " " + fn_et.getText().toString());
+            onjCra.setDobV(dob_et.getText().toString());
+            onjCra.setAgeV(String.valueOf(ageOfUser));
+            onjCra.setGenderV(gender_et.getText().toString());
+            onjCra.setTaxDateV(taxdate_et.getText().toString());
+            onjCra.setGrossInV(grossin_et.getText().toString());
+            onjCra.setFedTaxV(fedTax_et.getText().toString());
+            onjCra.setProvTaxV(provTax_et.getText().toString());
+            onjCra.setCppV(cpp_et.getText().toString());
+            onjCra.setEiV(ei_et.getText().toString());
+            onjCra.setRrspV(rrsp_et.getText().toString());
+            onjCra.setCfwdV(cfwd_rrsp_et.getText().toString());
+            onjCra.setTtlInV(ttl_taxin_et.getText().toString());
+            onjCra.setTtlPyV(ttl_taxpyd_et.getText().toString());
 
             // navigate
             Intent dAct = new Intent(MainActivity.this, DetailActivity.class);
 
-            HashMap<String, String> dataMap=new HashMap<String, String>();
+//            HashMap<String, String> dataMap=new HashMap<String, String>();
+//
+//            dataMap.put("SinMV", sin_et.getText().toString());
+//            dataMap.put("FnameMV", fn_et.getText().toString());
+//            dataMap.put("LnameMV", ln_et.getText().toString());
+//            dataMap.put("FulnameMV", ln_et.getText().toString().toUpperCase() + " " + fn_et.getText().toString());
+//            dataMap.put("DobMV", dob_et.getText().toString());
+//            dataMap.put("AgeMV", String.valueOf(ageOfUser));
+//            dataMap.put("GenderMV", gender_et.getText().toString());
+//            dataMap.put("TaxDateMV", taxdate_et.getText().toString());
+//            dataMap.put("GrossInMV", grossin_et.getText().toString());
+//            dataMap.put("RrspMV", rrsp_et.getText().toString());
+//            dataMap.put("CarrFwdMV", cfwd_rrsp_et.getText().toString());
+//            dataMap.put("TtlTaxInMV", ttl_taxin_et.getText().toString());
+//            dataMap.put("CppMV", cpp_et.getText().toString());
+//            dataMap.put("EiMV", ei_et.getText().toString());
+//            dataMap.put("FtMV", fedTax_et.getText().toString());
+//            dataMap.put("PrMV", provTax_et.getText().toString());
+//            dataMap.put("TtPayMV", ttl_taxpyd_et.getText().toString());
 
-            dataMap.put("SinMV", sin_et.getText().toString());
-            dataMap.put("FnameMV", fn_et.getText().toString());
-            dataMap.put("LnameMV", ln_et.getText().toString());
-            dataMap.put("FulnameMV", ln_et.getText().toString().toUpperCase() + " " + fn_et.getText().toString());
-            dataMap.put("DobMV", dob_et.getText().toString());
-            dataMap.put("AgeMV", String.valueOf(ageOfUser));
-            dataMap.put("GenderMV", gender_et.getText().toString());
-            dataMap.put("TaxDateMV", taxdate_et.getText().toString());
-            dataMap.put("GrossInMV", grossin_et.getText().toString());
-            dataMap.put("RrspMV", rrsp_et.getText().toString());
-            dataMap.put("CarrFwdMV", cfwd_rrsp_et.getText().toString());
-            dataMap.put("TtlTaxInMV", ttl_taxin_et.getText().toString());
-            dataMap.put("CppMV", cpp_et.getText().toString());
-            dataMap.put("EiMV", ei_et.getText().toString());
-            dataMap.put("FtMV", fedTax_et.getText().toString());
-            dataMap.put("PrMV", provTax_et.getText().toString());
-            dataMap.put("TtPayMV", ttl_taxpyd_et.getText().toString());
-
-            dAct.putExtra("DataCal", dataMap);
+            dAct.putExtra("DataCal", onjCra);
 
             startActivity(dAct);
         }

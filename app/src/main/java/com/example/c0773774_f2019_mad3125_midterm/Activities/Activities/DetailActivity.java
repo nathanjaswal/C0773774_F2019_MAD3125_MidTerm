@@ -41,7 +41,7 @@ public class DetailActivity extends AppCompatActivity {
     TextView provTax_tv;
     Button backBtn;
 
-//////////////
+////////////////
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

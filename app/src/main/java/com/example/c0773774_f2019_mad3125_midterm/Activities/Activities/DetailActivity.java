@@ -41,7 +41,7 @@ public class DetailActivity extends AppCompatActivity {
     TextView provTax_tv;
     Button backBtn;
 
-
+//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +50,7 @@ public class DetailActivity extends AppCompatActivity {
         //
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-        
+
 
         Intent intent = getIntent();
         CRADataModel craObj = intent.getParcelableExtra("DataCal");
